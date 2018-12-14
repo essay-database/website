@@ -21,7 +21,10 @@ export default class MyDocument extends Document {
             name="description"
             content="collection of college application essays and personal statements"
           />
-          {/* uikit */}
+          <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css?family=Roboto:300,400,500"
+          />
           <link
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.25/css/uikit.min.css"
@@ -29,7 +32,6 @@ export default class MyDocument extends Document {
           <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.25/js/uikit.min.js" />
           <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.25/js/uikit-icons.min.js" />
         </Head>
-
         <body>
           <Main />
           <NextScript crossOrigin="anonymous" />

@@ -1,16 +1,27 @@
 {
-  "name": "website",
+  "name": "essaydb-website",
   "version": "1.0.0",
-  "description": "website for essaydatabase.org",
+  "description": "essaydb website",
   "main": "index.js",
   "dependencies": {
     "@zeit/next-css": "^1.0.1",
     "next": "^7.0.2",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
-    "uikit": "^3.0.0-rc.25"
+    "uikit": "^3.0.0-rc.25",
+    "@material-ui/core": "^3.6.2",
+    "@material-ui/icons": "3.0.1",
+    "axios": "^0.18.0",
+    "faker": "4.1.0",
+    "lodash": "^4.17.11",
+    "mui-datatables": "2.0.0-beta-35",
+    "prop-types": "^15.6.2",
+    "react-scripts": "2.1.1",
+    "uuid": "^3.3.2"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "json-server": "^0.14.0"
+  },
   "scripts": {
     "dev": "next",
     "build": "next build",

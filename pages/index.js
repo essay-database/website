@@ -1,5 +1,5 @@
 export default () => (
   <div>
-    <p className="uk-text-center">Welcome to next.js!</p>
+    <p className="uk-text-center">hello essaydb</p>
   </div>
 );
