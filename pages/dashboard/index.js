@@ -22,39 +22,11 @@ import uuidv1 from "uuid/v1";
 import isEqual from "lodash/isEqual";
 import getData, { columns, years, statuses, countries, states } from "./data";
 import { getEssays, createEssay, editEssay, deleteEssay } from "./api";
+import * as utils from "./utils";
 import "./index.css";
 
-function logState(action, state) {
-  console.log(action, state);
-}
-
-function isString(value) {
-  return typeof value === "string" || value instanceof String;
-}
-
-function isNumber(value) {
-  return typeof value === "number" && isFinite(value);
-}
-
-function isBoolean(value) {
-  return typeof value === "boolean";
-}
-
-const isValid = value =>
-  (isString(value) && value.length > 0) ||
-  (isNumber(value) && value > -1) ||
-  isBoolean(value);
-
-const format = value => (isString(value) ? value.trim() : value);
-
-const deepClone = value => JSON.parse(JSON.stringify(value));
-
 class App extends PureComponent {
-  static async getInitialProps({ req }) {
-    return {
-      env: "dev"
-    };
-  }
+  static async getInitialProps({}) {}
   state = {
     open: false,
     data: [],
@@ -62,9 +34,9 @@ class App extends PureComponent {
     row: []
   };
 
-  validateRow = row => isValid(row[1]);
+  validateRow = row => utils.isValid(row[1]);
 
-  formatRow = row => row.map(value => format(value));
+  formatRow = row => row.map(value => utils.format(value));
 
   createRow = () => {
     const row = [
@@ -92,7 +64,7 @@ class App extends PureComponent {
 
   handleRowClick = (_, { dataIndex }) => {
     this.setState(({ data }) => {
-      logState("click", this.state);
+      utils.logState("click", this.state);
       return {
         open: true,
         dataIndex,
@@ -105,7 +77,7 @@ class App extends PureComponent {
     let sync = false;
     this.setState(
       ({ data, dataIndex }) => {
-        logState("delete", this.state);
+        utils.logState("delete", this.state);
         if (this.handleConfirm("are you sure?")) {
           const newData = data.filter((_, idx) => idx !== dataIndex);
           sync = true;
@@ -123,7 +95,7 @@ class App extends PureComponent {
 
   handleAdd = () => {
     this.setState(({ data }) => {
-      logState("add", this.state);
+      utils.logState("add", this.state);
       return {
         row: this.createRow(),
         open: true,
@@ -134,7 +106,7 @@ class App extends PureComponent {
 
   handleClose = () => {
     this.setState(({ data, dataIndex, row }) => {
-      logState("close", this.state);
+      utils.logState("close", this.state);
       if (dataIndex < data.length) {
         if (!isEqual(row, data[dataIndex])) {
           if (this.handleConfirm("abandon changes?")) return { open: false };
@@ -152,7 +124,7 @@ class App extends PureComponent {
       sync = false;
     this.setState(
       ({ dataIndex, data, row }) => {
-        logState("save", this.state);
+        utils.logState("save", this.state);
         let update = false;
         if (dataIndex < data.length) {
           if (this.validateRow(this.formatRow(row))) {
@@ -180,7 +152,7 @@ class App extends PureComponent {
   handleChange = index => ({ target }) => {
     const value = target.type === "checkbox" ? target.checked : target.value;
     this.setState(({ row }) => {
-      logState("change", this.state);
+      utils.logState("change", this.state);
       row[index] = value;
       return { row: [...row] };
     });
@@ -261,7 +233,7 @@ class App extends PureComponent {
                     rows={10}
                     fullWidth
                     required
-                    error={!isValid(essay)}
+                    error={!utils.isValid(essay)}
                     InputLabelProps={{ shrink: true }}
                   />
                   <TextField
@@ -458,7 +430,7 @@ const styles = theme => ({
 
 App.propTypes = {
   classes: PropTypes.object.isRequired,
-  env: PropTypes.string.isRequired
+  env: PropTypes.string
 };
 
 export default withStyles(styles)(App);
