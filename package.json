@@ -27,6 +27,15 @@
     "build": "next build",
     "start": "next start"
   },
-  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/essayDB/website.git"
+  },
+  "author": {
+    "email": "info@essaydatabase.org",
+    "name": "essaydatabase",
+    "url": "http://www.essaydatabase.org"
+  },
+  "private": true,
   "license": "UNLICENCED"
 }
